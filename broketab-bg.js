@@ -53,25 +53,25 @@ onPress = (eventx) => {
                 }
             }
             else{
-                browser.tabs.query({active: false}).then(
-                    (result2) => {
-                        if (result2.length > 0)  {            
-                            let t = 0
-                            while(t< result2.length) {
-                                windowId  = result2[t].windowId
-                                tabId     = result2[t].id
-                                t++
-                                if (tabId != browser.tabs.TAB_ID_NONE)   {
-                                    t = result2.length
-                                }
-                            }
-                        }
-                        if (tabId != browser.tabs.TAB_ID_NONE && tabId !=  0)   {
-                            browser.windows.update(windowId, {focused:true})
-                            browser.tabs.update(tabId,{active:true})
-                        }
-                    }
-                )
+                // browser.tabs.query({active: false}).then(
+                //     (result2) => {
+                //         if (result2.length > 0)  {            
+                //             let t = 0
+                //             while(t< result2.length) {
+                //                 windowId  = result2[t].windowId
+                //                 tabId     = result2[t].id
+                //                 t++
+                //                 if (tabId != browser.tabs.TAB_ID_NONE)   {
+                //                     t = result2.length
+                //                 }
+                //             }
+                //         }
+                //         if (tabId != browser.tabs.TAB_ID_NONE && tabId !=  0)   {
+                //             browser.windows.update(windowId, {focused:true})
+                //             browser.tabs.update(tabId,{active:true})
+                //         }
+                //     }
+                // )
                 console.log("None found!")
                 console.log(result)
 
