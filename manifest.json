@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Busted-Tab-Finder",
+    "version": "0.1",
+    "description": "Jump to broken tab",
+
+    "background":{
+        "scripts":["broketab-bg.js"]
+    },
+    "browser_action":{
+            
+        "default_icon": "21837-200.png"
+
+    }
+    ,
+    "browser_specific_settings": {
+        "gecko": {
+          "id": "Busted-Tab-Finder@Parker-Parker.Github.io"
+        }
+    }, 
+    
+    "permissions": [ 
+        "activeTab",
+        "tabs"
+
+    ]
+    
+}
