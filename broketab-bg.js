@@ -4,26 +4,15 @@ let lastPressed = 0.0;
 onPress = (eventx) => {
     
     timeNow = Date.now();
-
-    // if (timeNow -lastPressed>1000){
-    //     const md_link = "\n[" + eventx.title +"]"+"("+eventx.url+")";
-    //     navigator.clipboard.writeText(md_link);
-    //     browser.tabs.executeScript({ file: "/markdown.js" })
-    // }
-    // else{
-    //     console.log("DORUBLE KORICKU")
-    //     let md_link = "\n";
-    //     browser.tabs.query({currentWindow : true}).then(
-    //         (result) => {
-    //             result.forEach((tab) => {
-    //                 md_link += "[" + tab.title +"]"+"("+tab.url+")\n"
-    //             });
-                
-    //             navigator.clipboard.writeText(md_link);
-    //             // console.log(md_link)
-    //         }
-    //     )
-    // }
+    let dclick = false;
+    if (timeNow -lastPressed>1000){
+        // single click
+        dclick = false
+    }
+    else{
+        console.log("DORUBLE KORICKU")
+        dclick = true
+    }
 
     
 
@@ -53,28 +42,121 @@ onPress = (eventx) => {
                 }
             }
             else{
-                // browser.tabs.query({active: false}).then(
-                //     (result2) => {
-                //         if (result2.length > 0)  {            
-                //             let t = 0
-                //             while(t< result2.length) {
-                //                 windowId  = result2[t].windowId
-                //                 tabId     = result2[t].id
-                //                 t++
-                //                 if (tabId != browser.tabs.TAB_ID_NONE)   {
-                //                     t = result2.length
-                //                 }
-                //             }
-                //         }
-                //         if (tabId != browser.tabs.TAB_ID_NONE && tabId !=  0)   {
-                //             browser.windows.update(windowId, {focused:true})
-                //             browser.tabs.update(tabId,{active:true})
-                //         }
-                //     }
-                // )
                 console.log("None found!")
                 console.log(result)
+                
+                if(dclick){
 
+                    browser.tabs.query({title: "Tab crash reporter"}).then(
+                        (tcrresult) => {
+
+                            windowId  = 0
+                            tabId     = 0
+                
+                            if (tcrresult.length > 0)  {
+                                console.log("ONE FOUND!")
+                                console.log(tcrresult)
+                
+                                let t = 0
+                                while(t< tcrresult.length) {
+                                    windowId  = tcrresult[t].windowId
+                                    tabId     = tcrresult[t].id
+                                    t++
+                                    if (tabId != browser.tabs.TAB_ID_NONE)   {
+                                        t = tcrresult.length
+                                    }
+                                }
+                
+                                if (tabId != browser.tabs.TAB_ID_NONE && tabId !=  0)   {
+                                    browser.windows.update(windowId, {focused:true})
+                                    browser.tabs.update(tabId,{active:true})
+                                }
+                            }
+                            else{
+                                console.log("None found!")
+                                console.log(tcrresult)
+
+
+                                browser.tabs.query({title: "Server Not Found"}).then(
+                                    (snfresult) => {
+
+                                        windowId  = 0
+                                        tabId     = 0
+                            
+                                        if (snfresult.length > 0)  {
+                                            console.log("ONE FOUND!")
+                                            console.log(snfresult)
+                            
+                                            let t = 0
+                                            while(t< snfresult.length) {
+                                                windowId  = snfresult[t].windowId
+                                                tabId     = snfresult[t].id
+                                                t++
+                                                if (tabId != browser.tabs.TAB_ID_NONE)   {
+                                                    t = snfresult.length
+                                                }
+                                            }
+                            
+                                            if (tabId != browser.tabs.TAB_ID_NONE && tabId !=  0)   {
+                                                browser.windows.update(windowId, {focused:true})
+                                                browser.tabs.update(tabId,{active:true})
+                                            }
+                                        }
+                                        else{
+                                            console.log("None found!")
+                                            console.log(snfresult)
+                                            //search for empty tabs
+                                            browser.tabs.query({title: "New Tab"}).then(
+                                                (ntresult) => {
+                        
+                                                    windowId  = 0
+                                                    tabId     = 0
+                                        
+                                                    if (ntresult.length > 0)  {
+                                                        console.log("ONE FOUND!")
+                                                        console.log(ntresult)
+                                        
+                                                        let t = 0
+                                                        while(t< ntresult.length) {
+                                                            windowId  = ntresult[t].windowId
+                                                            tabId     = ntresult[t].id
+                                                            t++
+                                                            if (tabId != browser.tabs.TAB_ID_NONE)   {
+                                                                t = ntresult.length
+                                                            }
+                                                        }
+                                        
+                                                        if (tabId != browser.tabs.TAB_ID_NONE && tabId !=  0)   {
+                                                            browser.windows.update(windowId, {focused:true})
+                                                            browser.tabs.update(tabId,{active:true})
+                                                        }
+                                                    }
+                                                    else{
+                                                        console.log("None found!")
+                                                        console.log(ntresult)
+                        
+                                                    }
+                                                }
+                        
+                                            )
+
+
+                                        }
+                                    }
+
+                                )
+
+
+                            }
+                        }
+
+                    )
+
+
+
+
+                }
+                    
             }
 
             // if (tabId != browser.tabs.TAB_ID_NONE)   {
